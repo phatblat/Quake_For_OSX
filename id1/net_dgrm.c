@@ -19,6 +19,25 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 // net_dgrm.c
 
+
+//#include <machine/_types.h>
+typedef unsigned char           __uint8_t;
+//typedef short                   __int16_t;
+typedef unsigned short          __uint16_t;
+//typedef int                     __int32_t;
+typedef unsigned int            __uint32_t;
+//typedef long long               __int64_t;
+//typedef unsigned long long      __uint64_t;
+
+//#include <sys/_types/_in_addr_t.h>
+typedef __uint32_t              in_addr_t;
+
+//#include <sys/_types/_sa_family_t.h>
+typedef __uint8_t               sa_family_t;
+
+//#include <sys/_types/_in_port_t.h>
+typedef __uint16_t              in_port_t;
+
 // This is enables a simple IP banning mechanism
 #define BAN_TEST
 
@@ -32,18 +51,20 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define AF_INET 		2	/* internet */
 struct in_addr
 {
-	union
-	{
-		struct { unsigned char s_b1,s_b2,s_b3,s_b4; } S_un_b;
-		struct { unsigned short s_w1,s_w2; } S_un_w;
-		unsigned int S_addr;
-	} S_un;
+    in_addr_t s_addr; // unsigned int
+//	union
+//	{
+//		struct { unsigned char s_b1,s_b2,s_b3,s_b4; } S_un_b;
+//		struct { unsigned short s_w1,s_w2; } S_un_w;
+//      unsigned int S_addr;
+//	} S_un;
 };
-#define	s_addr	S_un.S_addr	/* can be used for most tcp & ip code */
+//#define	s_addr	S_un.s_addr	/* can be used for most tcp & ip code */
 struct sockaddr_in
 {
-    short			sin_family;
-    unsigned short	sin_port;
+    __uint8_t   sin_len;    // unsigned char
+    sa_family_t	sin_family; // __uint8_t
+    in_port_t	sin_port;   // unsigned short
 	struct in_addr	sin_addr;
     char			sin_zero[8];
 };
