@@ -1,4 +1,7 @@
+.DS_Store
+*.xccheckout
+*.xcscmblueprint
+*.zip
+xcuserdata
 /Podfile.lock
-/Pods
-/Quake_iOS_VR/quake106data.zip
-
+/Pods/
